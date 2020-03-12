@@ -9,7 +9,7 @@ function getIndex(list, id) {
 
 
 var missionApi = Vue.resource('/mission{/id}');
-
+var superName = '';
 Vue.component('mission-form', {
     props: ['missions', 'missionAttr'],
     data: function() {
@@ -24,6 +24,7 @@ Vue.component('mission-form', {
     watch: {
         missionAttr: function(newVal, oldVal) {
             this.name = newVal.name;
+            superName = this.name;
             this.id = newVal.id;
             this.type = newVal.type;
             this.creationDate = newVal.creationDate;
@@ -77,7 +78,7 @@ Vue.component('mission-row', {
     props: ['mission', 'editMethod', 'missions'],
     template:
         '<div>' +
-            '<strong>[{{ mission.name }}]</strong>' +
+            '<strong>[{{ mission.name }}]</strong>' + // вот это
             '<span style="position: absolute; right: 0">' +
                '<input type="button" value="Edit" @click="edit" />' +
                '<input type="button" value="X" @click="del" />' +
@@ -135,16 +136,135 @@ var missions = new Vue({
   el: '#missions',
   template: '<missions-list :missions="missions" />',
   data: {
-      missions: [],
-      selected: 'Panchromatic'
+      missions: []
   }
 });
 
-/*
+
+
+
+var productApi = Vue.resource('/product{/id}');
+
+Vue.component('product-form', {
+    props: ['products', 'productAttr', 'missions'],
+    data: function() {
+        return {
+            name: '',
+            id: '',
+            footprint: '',
+            price: '',
+            url: ''
+        }
+    },
+    watch: {
+        productAttr: function(newVal, oldVal) {
+            this.name = newVal.name;
+            this.id = newVal.id;
+            this.footprint = newVal.footprint;
+            this.price = newVal.price;
+            this.url = newVal.url;
+        }
+    },
+    template:
+        '<div>' +
+            '<input type="name" placeholder="Name" v-model="name" />' +
+            '<select type="footprint" v-model="footprint" style="margin-left: 5px;">' + // вот сюда нужно вставить
+                '<option value="Panchromatic">Panchromatic</option>' +
+                '<option value="Multispectral">Multispectral</option>' +
+                '<option value="Hyperspectral">Hyperspectral</option>' +
+            '</select>' +
+            '<input type="price" placeholder="Price" v-model="price" style="margin-left: 5px;"/>' +
+            '<input type="url" placeholder="Image url" v-model="url" style="margin-left: 5px;"/>' +
+            '<input type="button" value="Save" @click="save" style="margin-left: 5px;"/>' +
+        '</div>',
+    methods: {
+        save: function() {
+            var product = { name: this.name, footprint: this.footprint, price: this.price, url: this.url };
+                if (this.id) {
+                    productApi.update({id: this.id}, product).then(result =>
+                        result.json().then(data => {
+                            var index = getIndex(this.products, data.id);
+                            this.products.splice(index, 1, data);
+                            this.name = ''
+                            this.id = ''
+                            this.footprint = ''
+                            this.price = ''
+                            this.url = ''
+                        })
+                    )
+                } else {
+                    productApi.save({}, product).then(result =>
+                        result.json().then(data => {
+                            this.products.push(data);
+                            this.name = ''
+                            this.footprint = ''
+                            this.price = ''
+                            this.url = ''
+                        })
+                    )
+                }
+        }
+    }
+});
+
+Vue.component('product-row', {
+    props: ['product', 'products'],
+    template:
+        '<div>' +
+            '<strong>[{{ product.name }}]</strong>' +
+            '<span style="position: absolute; right: 0">' +
+               '<input type="button" value="X" @click="del" />' +
+            '</span>' +
+                '<ul>' +
+                    '<li><strong>Footprint:</strong> {{ product.footprint }}</li>' +
+                    '<li><strong>Price:</strong> {{ product.price }}</li>' +
+                    '<li><strong>Url:</strong> {{ product.url }}</li>' +
+                '</ul>' +
+        '</div>',
+    methods: {
+        del: function() {
+            productApi.remove({id: this.product.id}).then(result => {
+                if (result.ok) {
+                    this.products.splice(this.products.indexOf(this.product), 1)
+                }
+            })
+        }
+    }
+});
+
+Vue.component('products-list', {
+  props: ['products'],
+  data: function() {
+    return {
+        product: null
+    }
+  },
+  template:
+    '<div>' +
+        '<product-form :products="products" :productAttr="product" />' +
+        '<div style="position: relative; width: 580px">' +
+            '<product-row v-for="product in products" :key="product.id" :product="product" ' +
+                ':products="products" style="padding-top: 10px;"/>' +
+        '</div>' +
+    '</div>',
+  created: function() {
+    productApi.get().then(result =>
+        result.json().then(data =>
+            data.forEach(product => this.products.push(product))
+        )
+    )
+  }
+});
+
 var products = new Vue({
     el: '#products',
-    template: '<products-list: :products="products" />',
+    template: '<products-list :products="products" />',
     data: {
-        products: []
+        products: [],
+        items: [
+              { message: 'Foo' },
+              { message: 'Bar' }
+            ]
     }
-});*/
+});
+

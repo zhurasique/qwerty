@@ -4,26 +4,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 @Entity
 @Table
-@ToString (of = {"id", "text"})
+@ToString (of = {"id", "name"})
 public class Mission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(unique = true)
+    @NotEmpty(message = "Provide a name")
     private String name;
 
+    @NotEmpty(message = "Provide a type")
     private String type;
 
     @Column(updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime creationDate;
 
+    @NotEmpty(message = "Provide a date of finish")
     private String finishDate;
 
     public String getName() {
