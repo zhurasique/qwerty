@@ -17,7 +17,7 @@ public class Mission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-
+    @Column(unique = true)
     private String name;
 
     @NotEmpty(message = "Provide a type")
