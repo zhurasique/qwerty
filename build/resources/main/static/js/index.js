@@ -38,8 +38,8 @@ Vue.component('mission-form', {
                 '<option value="Multispectral">Multispectral</option>' +
                 '<option value="Hyperspectral">Hyperspectral</option>' +
             '</select>' +
-            '<input type="startDate" placeholder="Start date" v-model="startDate" style="margin-left: 5px;"/>' +
-            '<input type="finishDate" placeholder="Finish date" v-model="finishDate" style="margin-left: 5px;"/>' +
+            '<input type="text" placeholder="Start date" v-model="startDate" style="margin-left: 5px;"/>' +
+            '<input type="text" placeholder="Finish date" v-model="finishDate" style="margin-left: 5px;"/>' +
             '<input type="button" value="Save" @click="save" style="margin-left: 5px;"/>' +
         '</div>',
     methods: {

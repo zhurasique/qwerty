@@ -1,6 +1,5 @@
 package space.datahub.controller;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import space.datahub.domain.Product;
@@ -9,7 +8,6 @@ import space.datahub.repo.ProductRepo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("product")
@@ -52,7 +50,7 @@ public class ProductController {
         return null;
     }
 
-    @GetMapping("/order")
+    @PostMapping("/order")
     public List<Product> order(@RequestParam List<Long> table){
         List<Product> products;
         List<Product> tmpProducts = new ArrayList<>();

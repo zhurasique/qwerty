@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 @ToString(of = {"id", "name"})
-public class Product {
+public class Product{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

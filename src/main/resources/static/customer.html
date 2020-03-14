@@ -9,11 +9,11 @@
 <body>
 
 <style>
-    h2{
+    h2 {
         margin-top: 15px;
     }
 
-    .block{
+    .block {
         display: block;
         border: 1px solid;
         padding: 10px;
@@ -21,18 +21,18 @@
         border-radius: 10px;
     }
 
-    .flex{
+    .flex {
         display: flex;
         max-width: 2000px;
         margin: auto;
         justify-content: space-around;
     }
 
-    .center{
+    .center {
         text-align: center;
     }
 
-    .flexed{
+    .flexed {
         max-width: 800px;
     }
 
@@ -41,27 +41,82 @@
 
 <h1 style="text-align: center">Space Agency Data Hub</h1>
 
-<div class="flex">
+<div class="flex" id="app">
     <div class="block flexed">
         <h2 class="center">Products</h2>
-        <div id="products"></div>
+        <div id="products">
+            <div v-for="product in products" :key="product.id">
+                <div style="position: relative; width: 580px">
+                    <div>
+                        <strong>[{{ product.name }}]</strong>
+                        <span style="position: absolute; right: 0"><input type="button" value="Order" @click="order(product)"/></span>
+                        <ul>
+                            <li><strong>Price:</strong> {{ product.price }} $</li>
+                            <li><strong>Url:</strong> hidden</li>
+                            <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="flexed">
         <div class="block">
             <h2 class="center">Search</h2>
-            <div id="filters"></div>
+            <div id="filters">
+                <div>
+                    <div> 
+                        <input type="name" placeholder="Name" v-model="search_name" />
+                        <input type="button" value="Find" @click="find" style="margin-left: 5px;"/>
+                    </div> 
+                    <div style="position: relative; width: 580px">
+                        <div v-for="product in found_products" :key="product.id">
+                            <div style="position: relative; width: 580px">
+                                <div>
+                                    <strong>[{{ product.name }}]</strong>
+                                    <span style="position: absolute; right: 0"><input type="button" value="Order" @click="order(product)"/></span>
+                                    <ul>
+                                        <li><strong>Price:</strong> {{ product.price }} $</li>
+                                        <li><strong>Url:</strong> hidden</li>
+                                        <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="block">
-            <h2 class="center">Order list</h2>
-            <div id="orders"></div>
+                <h2 class="center">Order list</h2>
+            <div id="orders">
+                <div style="position: relative; width: 580px">
+                    <div v-for="product in ordered_products" :key="product.id">
+                        <div style="position: relative; width: 580px">
+                            <div>
+                                <strong>[{{ product.name }}]</strong>
+                                <span style="position: absolute; right: 0"><input type="button" value="X" @click="removeOrder(product)"/></span>
+                                <ul>
+                                    <li><strong>Price:</strong> {{ product.price }} $</li>
+                                    <li><strong>Url:</strong> hidden</li>
+                                    <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="End order" @click="endOrder" />
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 
+<script>
 
-
+</script>
 
 <script src="/js/customer.js"></script>
 </body>
