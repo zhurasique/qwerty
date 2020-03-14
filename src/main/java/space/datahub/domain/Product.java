@@ -1,9 +1,12 @@
 package space.datahub.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -14,17 +17,26 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotEmpty(message = "Provide a name")
+    @NotNull
     private String name;
 
-    @NotEmpty(message = "Provide a footprint")
-    private String footprint;
-
-    @NotEmpty(message = "Provide a price")
+    @NotNull
     private int price;
 
-    @NotEmpty(message = "Provide a url")
+    @NotNull
     private String url;
+
+    @Column(updatable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime creationDate;
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public long getId() {
         return id;
@@ -40,14 +52,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getFootprint() {
-        return footprint;
-    }
-
-    public void setFootprint(String footprint) {
-        this.footprint = footprint;
     }
 
     public int getPrice() {

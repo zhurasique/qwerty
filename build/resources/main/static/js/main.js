@@ -9,7 +9,7 @@ function getIndex(list, id) {
 
 
 var missionApi = Vue.resource('/mission{/id}');
-var superName = '';
+
 Vue.component('mission-form', {
     props: ['missions', 'missionAttr'],
     data: function() {
@@ -17,17 +17,16 @@ Vue.component('mission-form', {
             name: '',
             id: '',
             type: '',
-            creationDate: '',
+            startDate: '',
             finishDate: ''
         }
     },
     watch: {
         missionAttr: function(newVal, oldVal) {
             this.name = newVal.name;
-            superName = this.name;
             this.id = newVal.id;
             this.type = newVal.type;
-            this.creationDate = newVal.creationDate;
+            this.startDate = newVal.startDate;
             this.finishDate = newVal.finishDate;
         }
     },
@@ -39,14 +38,13 @@ Vue.component('mission-form', {
                 '<option value="Multispectral">Multispectral</option>' +
                 '<option value="Hyperspectral">Hyperspectral</option>' +
             '</select>' +
+            '<input type="startDate" placeholder="Finish date" v-model="startDate" style="margin-left: 5px;"/>' +
             '<input type="finishDate" placeholder="Finish date" v-model="finishDate" style="margin-left: 5px;"/>' +
             '<input type="button" value="Save" @click="save" style="margin-left: 5px;"/>' +
         '</div>',
     methods: {
         save: function() {
-            var mission = { name: this.name, type: this.type, finishDate: this.finishDate, creationDate: this.creationDate };
-
-            if(this.name != '' && this.finishDate != '' && this.type != ''){
+            var mission = { name: this.name, type: this.type, startDate: this.startDate, finishDate: this.finishDate };
                 if (this.id) {
                     missionApi.update({id: this.id}, mission).then(result =>
                         result.json().then(data => {
@@ -55,7 +53,7 @@ Vue.component('mission-form', {
                             this.name = ''
                             this.id = ''
                             this.type = ''
-                            this.creationDate = ''
+                            this.startDate = ''
                             this.finishDate = ''
                         })
                     )
@@ -65,10 +63,10 @@ Vue.component('mission-form', {
                             this.missions.push(data);
                             this.name = ''
                             this.type = ''
+                            this.startDate = ''
                             this.finishDate = ''
                         })
                     )
-               }
            }
         }
     }
@@ -85,7 +83,7 @@ Vue.component('mission-row', {
             '</span>' +
                 '<ul>' +
                     '<li><strong>Mission type:</strong> {{ mission.type }}</li>' +
-                    '<li><strong>Date of start:</strong> {{ mission.creationDate }}</li>' +
+                    '<li><strong>Date of start:</strong> {{ mission.startDate }}</li>' +
                     '<li><strong>Date of finish:</strong> {{ mission.finishDate }}</li>' +
                 '</ul>' +
         '</div>',
@@ -143,43 +141,39 @@ var missions = new Vue({
 
 
 
+
 var productApi = Vue.resource('/product{/id}');
 
 Vue.component('product-form', {
-    props: ['products', 'productAttr', 'missions'],
+    props: ['products', 'productAttr'],
     data: function() {
         return {
             name: '',
             id: '',
-            footprint: '',
             price: '',
-            url: ''
+            url: '',
+            creationDate: ''
         }
     },
     watch: {
         productAttr: function(newVal, oldVal) {
             this.name = newVal.name;
             this.id = newVal.id;
-            this.footprint = newVal.footprint;
             this.price = newVal.price;
             this.url = newVal.url;
+            this.creationDate = newVal.creationDate;
         }
     },
     template:
         '<div>' +
             '<input type="name" placeholder="Name" v-model="name" />' +
-            '<select type="footprint" v-model="footprint" style="margin-left: 5px;">' + // вот сюда нужно вставить
-                '<option value="Panchromatic">Panchromatic</option>' +
-                '<option value="Multispectral">Multispectral</option>' +
-                '<option value="Hyperspectral">Hyperspectral</option>' +
-            '</select>' +
             '<input type="price" placeholder="Price" v-model="price" style="margin-left: 5px;"/>' +
             '<input type="url" placeholder="Image url" v-model="url" style="margin-left: 5px;"/>' +
             '<input type="button" value="Save" @click="save" style="margin-left: 5px;"/>' +
         '</div>',
     methods: {
         save: function() {
-            var product = { name: this.name, footprint: this.footprint, price: this.price, url: this.url };
+            var product = { name: this.name, price: this.price, url: this.url };
                 if (this.id) {
                     productApi.update({id: this.id}, product).then(result =>
                         result.json().then(data => {
@@ -187,9 +181,9 @@ Vue.component('product-form', {
                             this.products.splice(index, 1, data);
                             this.name = ''
                             this.id = ''
-                            this.footprint = ''
                             this.price = ''
                             this.url = ''
+                            this.creationDate = ''
                         })
                     )
                 } else {
@@ -197,7 +191,6 @@ Vue.component('product-form', {
                         result.json().then(data => {
                             this.products.push(data);
                             this.name = ''
-                            this.footprint = ''
                             this.price = ''
                             this.url = ''
                         })
@@ -216,9 +209,9 @@ Vue.component('product-row', {
                '<input type="button" value="X" @click="del" />' +
             '</span>' +
                 '<ul>' +
-                    '<li><strong>Footprint:</strong> {{ product.footprint }}</li>' +
                     '<li><strong>Price:</strong> {{ product.price }}</li>' +
                     '<li><strong>Url:</strong> {{ product.url }}</li>' +
+                    '<li><strong>Creation date:</strong> {{ product.creationDate }}</li>' +
                 '</ul>' +
         '</div>',
     methods: {
@@ -260,11 +253,72 @@ var products = new Vue({
     el: '#products',
     template: '<products-list :products="products" />',
     data: {
-        products: [],
-        items: [
-              { message: 'Foo' },
-              { message: 'Bar' }
-            ]
+        products: []
     }
 });
+
+
+
+var filterApi = Vue.resource('/product/filter?filter={name}');
+
+Vue.component('filter-form', {
+    props: ['products'],
+    data: function() {
+        return {
+            name: ''
+        }
+     },
+    template:
+        '<div>' +
+            '<input type="name" placeholder="Name" v-model="name" />' +
+            '<input type="button" value="Find" @click="created" style="margin-left: 5px;"/>' +
+        '</div>',
+    methods: {
+        created: function() {
+            console.log(this.products.length);
+            if(this.products.length > 0){
+                var size = this.products.length;
+                for (var i = 0; i < size; i++) {
+                    console.log(this.products.length + " i " + i);
+                    this.products.splice(this.products.indexOf(this.product), 1);
+                }
+            }
+            console.log(this.products.length);
+            filterApi.get({name: this.name}).then(result =>
+                result.json().then(data =>
+                    data.forEach(product => {
+                        this.products.push(product);
+                     })
+                )
+            )
+            console.log(this.products.length);
+          }
+    }
+});
+
+Vue.component('filters-list', {
+  props: ['products'],
+  data: function() {
+    return {
+        product: null
+    }
+  },
+  template:
+    '<div>' +
+        '<filter-form :products="products" :productAttr="product" />' +
+        '<div style="position: relative; width: 580px">' +
+            '<product-row v-for="product in products" :key="product.id" :product="product" ' +
+                ':products="products" style="padding-top: 10px;"/>' +
+        '</div>' +
+    '</div>'
+});
+
+var filters = new Vue({
+    el: '#filters',
+    template: '<filters-list :products="products" />',
+    data: {
+        products: []
+    }
+});
+
 

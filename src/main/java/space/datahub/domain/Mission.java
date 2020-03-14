@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
@@ -16,15 +17,14 @@ public class Mission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotEmpty(message = "Provide a name")
+
     private String name;
 
     @NotEmpty(message = "Provide a type")
     private String type;
 
-    @Column(updatable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime creationDate;
+    @NotEmpty(message = "Provide a date of finish")
+    private String startDate;
 
     @NotEmpty(message = "Provide a date of finish")
     private String finishDate;
@@ -53,12 +53,12 @@ public class Mission {
         this.finishDate = finishDate;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public long getId() {

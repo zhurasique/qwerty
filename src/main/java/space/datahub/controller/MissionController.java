@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import space.datahub.domain.Mission;
 import space.datahub.repo.MissionRepo;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,8 +31,7 @@ public class MissionController {
     }
 
     @PostMapping
-    public Mission create(@RequestBody Mission mission){
-        mission.setCreationDate(LocalDateTime.now());
+    public Mission create(@Valid @RequestBody Mission mission){
         return missionRepo.save(mission);
     }
 
