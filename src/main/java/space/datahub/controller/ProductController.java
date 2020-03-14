@@ -7,6 +7,7 @@ import space.datahub.domain.Product;
 import space.datahub.repo.ProductRepo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,12 +43,23 @@ public class ProductController {
     }
 
     @GetMapping("/filter")
-    public Iterable<Product> add(@RequestParam String filter, Map<String, Object> model){
+    public Iterable<Product> add(@RequestParam String filter){
         Iterable<Product> products = null;
         if(filter != null && !filter.isEmpty()) {
             products = productRepo.findByName(filter);
             return products;
         }
         return null;
+    }
+
+    @GetMapping("/order")
+    public List<Product> order(@RequestParam List<Long> table){
+        List<Product> products;
+        List<Product> tmpProducts = new ArrayList<>();
+        for (long tmp : table) {
+            products = productRepo.findById(tmp);
+            tmpProducts.add(products.get(0));
+        }
+        return tmpProducts;
     }
 }

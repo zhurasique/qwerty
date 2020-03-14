@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+<body>
+
+<style>
+    h2{
+        margin-top: 15px;
+    }
+
+    .block{
+        display: block;
+        border: 1px solid;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    .flex{
+        display: flex;
+        max-width: 2000px;
+        margin: auto;
+        justify-content: space-around;
+    }
+
+    .center{
+        text-align: center;
+    }
+
+    .flexed{
+        max-width: 800px;
+    }
+
+
+</style>
+
+<h1 style="text-align: center">Space Agency Data Hub</h1>
+
+<div class="flex">
+    <div class="block flexed">
+        <h2 class="center">Products</h2>
+        <div id="products"></div>
+    </div>
+
+    <div class="flexed">
+        <div class="block">
+            <h2 class="center">Search</h2>
+            <div id="filters"></div>
+        </div>
+
+        <div class="block">
+            <h2 class="center">Order list</h2>
+            <div id="orders"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/js/customer.js"></script>
+</body>
+</html>

@@ -26,6 +26,9 @@ public class Product {
     @NotNull
     private String url;
 
+    @ManyToOne
+    private Mission mission;
+
     @Column(updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime creationDate;
@@ -36,6 +39,14 @@ public class Product {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Mission getMission() {
+        return mission;
+    }
+
+    public void setMission(Mission mission) {
+        this.mission = mission;
     }
 
     public long getId() {
@@ -68,5 +79,9 @@ public class Product {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String toString(){
+        return "Name: " + name + "\n" + "ID: " + id;
     }
 }

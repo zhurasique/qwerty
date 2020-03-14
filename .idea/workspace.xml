@@ -6,6 +6,8 @@
       <change afterPath="$PROJECT_DIR$/../AbstractFactory/AbstractFactory.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../FactoryPattern/FactoryPattern.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../FactoryPatternt_train/FactoryPatternt_train.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/customer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/customer.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../remember/remember.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../repeat_2/repeat_2.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../sweater/.idea/vcs.xml" afterDir="false" />
@@ -42,32 +44,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/space/datahub/controller/MissionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/space/datahub/controller/MissionController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/space/datahub/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/space/datahub/controller/ProductController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/space/datahub/domain/Mission.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/space/datahub/domain/Mission.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/space/datahub/domain/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/space/datahub/domain/Product.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/space/datahub/repo/ProductRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/space/datahub/repo/ProductRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/space/datahub/controller/MissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/space/datahub/controller/MissionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/main.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/space/datahub/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/space/datahub/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/space/datahub/domain/Mission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/space/datahub/domain/Mission.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/space/datahub/domain/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/space/datahub/domain/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/space/datahub/repo/MissionRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/space/datahub/repo/MissionRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/space/datahub/repo/ProductRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/space/datahub/repo/ProductRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../remember/src/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../remember/src/Animal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../remember/src/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/../remember/src/BubbleSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../remember/src/Cat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../remember/src/Cat.java" afterDir="false" />
@@ -102,13 +90,26 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="Kotlin File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -128,7 +129,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../account_sharing-master" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
@@ -199,30 +200,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="276" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584018535050" />
-    <state x="765" y="205" key="#com.intellij.ide.util.MemberChooser" timestamp="1584099391211">
+    <state x="765" y="205" key="#com.intellij.ide.util.MemberChooser" timestamp="1584209488858">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="205" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584099391211" />
-    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1584099315396">
+    <state x="765" y="205" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584209488858" />
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1584200733915">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584099315396" />
-    <state width="1877" height="172" key="GridCell.Tab.0.bottom" timestamp="1584188254251">
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584200733915" />
+    <state width="1877" height="172" key="GridCell.Tab.0.bottom" timestamp="1584209535628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="172" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584188254251" />
-    <state width="1877" height="172" key="GridCell.Tab.0.center" timestamp="1584188254251">
+    <state width="1877" height="172" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584209535628" />
+    <state width="1877" height="172" key="GridCell.Tab.0.center" timestamp="1584209535628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="172" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584188254251" />
-    <state width="1877" height="172" key="GridCell.Tab.0.left" timestamp="1584188254251">
+    <state width="1877" height="172" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584209535628" />
+    <state width="1877" height="172" key="GridCell.Tab.0.left" timestamp="1584209535628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="172" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584188254251" />
-    <state width="1877" height="172" key="GridCell.Tab.0.right" timestamp="1584188254251">
+    <state width="1877" height="172" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584209535628" />
+    <state width="1877" height="172" key="GridCell.Tab.0.right" timestamp="1584209535628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="172" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584188254251" />
+    <state width="1877" height="172" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584209535628" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1584021119793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -243,10 +244,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584037962577" />
-    <state x="655" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1584187969376">
+    <state x="655" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1584198878111">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="655" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584187969376" />
+    <state x="655" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584198878111" />
     <state x="657" y="252" width="606" height="536" key="find.popup" timestamp="1584043753554">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
