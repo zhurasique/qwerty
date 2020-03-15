@@ -1,3 +1,6 @@
+// Front-end for ordering page
+// All request are processed by axios lib.
+
 let productApi = "/api/product";
 
     var vue = new Vue({

@@ -26,6 +26,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        // Here we are giving access for user roles to pages.
+        // order.html - page for ordering products
+        // admin.html - page of admin panel
+        // /api/** - any api requests
         http
                 .csrf().disable()
                 .authorizeRequests()

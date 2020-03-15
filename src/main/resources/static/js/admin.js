@@ -1,3 +1,6 @@
+// Front-end for admin page
+// All request are processed by axios lib.
+
 let productApi = "/api/product";
 let missionApi = "/api/mission";
 

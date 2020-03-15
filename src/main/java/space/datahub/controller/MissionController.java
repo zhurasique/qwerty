@@ -20,27 +20,32 @@ public class MissionController {
         this.missionRepo = missionRepo;
     }
 
+    // GET request for get all missions in DB -> /api/mission
     @GetMapping
     public List<Mission> list(){
         return missionRepo.findAll();
     }
 
+    // GET request for get one mission in DB by ID -> api/mission/4
     @GetMapping("{id}")
     public Mission getOne(@PathVariable("id") Mission mission){
         return mission;
     }
 
+    // POST request for create mission -> api/mission
     @PostMapping
     public Mission create(@Valid @RequestBody Mission mission){
         return missionRepo.save(mission);
     }
 
+    // PUT request for update mission data by ID -> api/mission/4
     @PutMapping("{id}")
     public Mission update(@PathVariable("id") Mission missionFromDb, @RequestBody Mission mission){
         BeanUtils.copyProperties(mission, missionFromDb, "id");
         return missionRepo.save(missionFromDb);
     }
 
+    // DELETE request for delete mission by ID -> api/mission/4
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Mission mission){
         missionRepo.delete(mission);

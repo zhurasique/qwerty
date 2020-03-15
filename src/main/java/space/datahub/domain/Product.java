@@ -47,6 +47,7 @@ public class Product{
     @Column(nullable = false)
     private double footprint_yx;
 
+    // field for check if user can see his URL
     @Column
     private boolean ordered;
 
@@ -123,7 +124,7 @@ public class Product{
     }
 
     public String getUrl() {
-
+        // Here we are checking if user is an admin. If true, he can see URL's of products.
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = "";
         if (principal instanceof UserDetails) {
@@ -132,6 +133,7 @@ public class Product{
              username = principal.toString();
         }
 
+        // If product was ordered or username is admin we can show URL of product, if no, we will send value "hidden".
         return ordered || username.equals("admin") ? url : "hidden";
     }
 
