@@ -1,4 +1,4 @@
-// Front-end for admin page
+// Front-end for admin page processed by Vue.js
 // All request are processed by axios lib.
 
 let productApi = "/api/product";

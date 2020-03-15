@@ -75,7 +75,7 @@ public class ProductController {
         return null;
     }
 
-    // POST request for ordering products
+    // POST request for ordering products -> api/product/order?table=4,5
     @PostMapping("/order")
     public List<Product> order(@RequestParam List<Long> table){
 

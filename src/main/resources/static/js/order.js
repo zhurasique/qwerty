@@ -1,4 +1,4 @@
-// Front-end for ordering page
+// Front-end for ordering page processed by Vue.js
 // All request are processed by axios lib.
 
 let productApi = "/api/product";
@@ -78,6 +78,7 @@ let productApi = "/api/product";
                     url:"/api/product/order?table="+this.ordered_ids
                 })
                     .then( response => {
+                        console.log(response.data);
                         this.toggle = true;
                         this.end_order = response.data;
                     })
