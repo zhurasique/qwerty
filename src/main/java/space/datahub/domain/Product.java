@@ -2,10 +2,13 @@ package space.datahub.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,8 +20,10 @@ public class Product{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
     private String name;
+
+    @ManyToOne
+    private Mission mission;
 
     @NotNull
     private int price;
@@ -26,18 +31,70 @@ public class Product{
     @NotNull
     private String url;
 
-    @ManyToOne
-    private Mission mission;
-
     @Column(updatable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime creationDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate creationDate;
 
-    public LocalDateTime getCreationDate() {
+    @Column(nullable = false)
+    private double footprint_xx;
+
+    @Column(nullable = false)
+    private double footprint_xy;
+
+    @Column(nullable = false)
+    private double footprint_yy;
+
+    @Column(nullable = false)
+    private double footprint_yx;
+
+    @Column
+    private boolean ordered;
+
+    public boolean isOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(boolean ordered) {
+        this.ordered = ordered;
+    }
+
+    public double getFootprint_xy() {
+        return footprint_xy;
+    }
+
+    public void setFootprint_xy(double footprint_xy) {
+        this.footprint_xy = footprint_xy;
+    }
+
+    public double getFootprint_yy() {
+        return footprint_yy;
+    }
+
+    public void setFootprint_yy(double footprint_yy) {
+        this.footprint_yy = footprint_yy;
+    }
+
+    public double getFootprint_yx() {
+        return footprint_yx;
+    }
+
+    public void setFootprint_yx(double footprint_yx) {
+        this.footprint_yx = footprint_yx;
+    }
+
+    public double getFootprint_xx() {
+        return footprint_xx;
+    }
+
+    public void setFootprint_xx(double footprint_xx) {
+        this.footprint_xx = footprint_xx;
+    }
+
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -57,14 +114,6 @@ public class Product{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPrice() {
         return price;
     }
@@ -74,14 +123,27 @@ public class Product{
     }
 
     public String getUrl() {
-        return url;
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+             username = principal.toString();
+        }
+
+        return ordered || username.equals("admin") ? url : "hidden";
     }
 
     public void setUrl(String url) {
         this.url = url;
     }
 
-    public String toString(){
-        return "Name: " + name + "\n" + "ID: " + id;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

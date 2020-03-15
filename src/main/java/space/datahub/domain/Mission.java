@@ -6,6 +6,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,11 +24,17 @@ public class Mission {
     @NotEmpty(message = "Provide a type")
     private String type;
 
-    @NotEmpty(message = "Provide a date of finish")
-    private String startDate;
+    private LocalDate startDate;
 
-    @NotEmpty(message = "Provide a date of finish")
-    private String finishDate;
+    private LocalDate finishDate;
+
+    public LocalDate getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(LocalDate finishDate) {
+        this.finishDate = finishDate;
+    }
 
     public String getName() {
         return name;
@@ -45,19 +52,11 @@ public class Mission {
         this.type = type;
     }
 
-    public String getFinishDate() {
-        return finishDate;
-    }
-
-    public void setFinishDate(String finishDate) {
-        this.finishDate = finishDate;
-    }
-
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+<body>
+
+<style>
+    select{
+        min-width: 130px;
+        min-height: 20px;
+    }
+
+
+    h2 {
+        margin-top: 15px;
+    }
+
+    .block {
+        display: block;
+        border: 1px solid;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    .flex {
+        display: flex;
+        max-width: 2000px;
+        margin: auto;
+        justify-content: space-around;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .flexed {
+        max-width: 800px;
+    }
+
+
+</style>
+
+<h1 style="text-align: center">Space Agency Data Hub</h1>
+
+<div class="flex" id="app">
+    <div class="block flexed">
+        <h2 class="center">Products</h2>
+        <div id="products">
+            <div v-for="product in products" :key="product.id">
+                <div style="position: relative; width: 580px">
+                    <div>
+                        <strong>[{{ product.name }}]</strong>
+                        <span style="position: absolute; right: 0"><input type="button" value="Order" @click="order(product)"/></span>
+                        <ul>
+                            <li><strong>Footprint XX:</strong> {{ product.footprint_xx }} </li>
+                            <li><strong>Footprint XY:</strong> {{ product.footprint_xy }} </li>
+                            <li><strong>Footprint YY:</strong> {{ product.footprint_yy }} </li>
+                            <li><strong>Footprint YX:</strong> {{ product.footprint_yx }} </li>
+                            <li><strong>Price:</strong> {{ product.price }} $</li>
+                            <li><strong>URL:</strong> {{ product.url }}</li>
+                            <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flexed">
+        <div class="block">
+            <h2 class="center">Search</h2>
+            <div id="filters">
+                <div>
+                    <div class="flex">
+                        <div>
+                            <input type="text" placeholder="Name" v-model="search_name" />
+                            <input type="button" value="Find" @click="findByName" style="margin-left: 5px;"/>
+                        </div>
+                        <div>
+                            <select v-model="search_type" style="margin-left: 5px;">
+                                <option value="Panchromatic">Panchromatic</option>
+                                <option value="Multispectral">Multispectral</option>
+                                <option value="Hyperspectral">Hyperspectral</option>
+                            </select>
+                            <input type="button" value="Find" @click="findByType" style="margin-left: 5px;"/>
+                        </div>
+                    </div>
+                    <div style="position: relative; width: 580px">
+                        <div v-for="product in found_products_by_name" :key="product.id">
+                            <div style="position: relative; width: 580px">
+                                <div>
+                                    <strong>[{{ product.name }}]</strong>
+                                    <span style="position: absolute; right: 0"><input type="button" value="Order" @click="order(product)"/></span>
+                                    <ul>
+                                        <li><strong>Footprint XX:</strong> {{ product.footprint_xx }} </li>
+                                        <li><strong>Footprint XY:</strong> {{ product.footprint_xy }} </li>
+                                        <li><strong>Footprint YY:</strong> {{ product.footprint_yy }} </li>
+                                        <li><strong>Footprint YX:</strong> {{ product.footprint_yx }} </li>
+                                        <li><strong>Price:</strong> {{ product.price }} $</li>
+                                        <li><strong>URL:</strong> {{ product.url }}</li>
+                                        <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="position: relative; width: 580px">
+                        <div v-for="product in found_products_by_type" :key="product.id">
+                            <div style="position: relative; width: 580px">
+                                <div>
+                                    <strong>[{{ product.name }}]</strong>
+                                    <span style="position: absolute; right: 0"><input type="button" value="Order" @click="order(product)"/></span>
+                                    <ul>
+                                        <li><strong>Footprint XX:</strong> {{ product.footprint_xx }} </li>
+                                        <li><strong>Footprint XY:</strong> {{ product.footprint_xy }} </li>
+                                        <li><strong>Footprint YY:</strong> {{ product.footprint_yy }} </li>
+                                        <li><strong>Footprint YX:</strong> {{ product.footprint_yx }} </li>
+                                        <li><strong>Price:</strong> {{ product.price }} $</li>
+                                        <li><strong>URL:</strong> {{ product.url }}</li>
+                                        <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+                <h2 class="center">Order list</h2>
+            <div id="orders">
+                <div style="position: relative; width: 580px">
+                    <div v-for="product in ordered_products" :key="product.id">
+                        <div style="position: relative; width: 580px">
+                            <div>
+                                <strong>[{{ product.name }}]</strong>
+                                <span style="position: absolute; right: 0"><input type="button" value="X" @click="removeOrder(product)"/></span>
+                                <ul>
+                                    <li><strong>Price:</strong> {{ product.price }} $</li>
+                                    <li><strong>URL:</strong> {{ product.url }}</li>
+                                    <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="End order" @click="endOrder" />
+        </div>
+    </div>
+
+
+    <div class="block flexed" v-show='toggle'>
+        <h2 class="center">Your URL's:</h2>
+        <div v-for="product in end_order" :key="product.id">
+            <div style="position: relative; width: 580px">
+                <div>
+                    <strong>[{{ product.name }}]</strong>
+                    <ul>
+                        <li><strong>URL:</strong> {{ product.url }}</li>
+                        <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                        <li><strong>ID:</strong> {{ product.id }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="/js/index.js"></script>
+</body>
+</html>

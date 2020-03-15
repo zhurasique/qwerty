@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+<body>
+
+<style>
+    select{
+        min-width: 130px;
+        min-height: 20px;
+    }
+
+    h2{
+        margin-top: 15px;
+    }
+
+    .block{
+        display: block;
+        border: 1px solid;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    .flex{
+        display: flex;
+        max-width: 2000px;
+        margin: auto;
+        justify-content: space-around;
+    }
+
+    .center{
+        text-align: center;
+    }
+
+    .flexed{
+        max-width: 800px;
+    }
+
+
+</style>
+
+<h1 style="text-align: center">Space Agency Data Hub</h1>
+
+<div class="flex" id="app">
+    <div class="flexed">
+        <div class="block">
+            <h2 class="center">Missions</h2>
+            <div id="missions">
+                <input type="text" placeholder="Name" v-model="mission_name" />
+                <select v-model="mission_type" style="margin-left: 5px;">
+                    <option value="Panchromatic">Panchromatic</option>
+                    <option value="Multispectral">Multispectral</option>
+                    <option value="Hyperspectral">Hyperspectral</option>
+                </select>
+                <input type="date" placeholder="Start date" v-model="mission_startDate" style="margin-left: 5px;"/>
+                <input type="date" placeholder="Finish date" v-model="mission_finishDate" style="margin-left: 5px;"/>
+                <input type="button" value="Save" @click="saveMission" style="margin-left: 5px;"/>
+            </div>
+            <div v-for="mission in missions" :key="mission.id">
+                <div style="position: relative; width: 580px">
+                    <div style="margin-top: 20px;">
+                        <strong>[{{ mission.name }}]</strong>
+                        <span style="position: absolute; right: 0">
+                           <input type="button" value="Edit" @click="edit(mission)" />
+                           <input type="button" value="X" @click="delMission(mission)"/>
+                        </span>
+                        <ul>
+                            <li><strong>ID:</strong> {{ mission.id }}</li>
+                            <li><strong>Name:</strong> {{ mission.name }}</li>
+                            <li><strong>Type:</strong> {{ mission.type }}</li>
+                            <li><strong>Date of start:</strong> {{ mission.startDate }}</li>
+                            <li><strong>Date of finish:</strong> {{ mission.finishDate }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+            <h2 class="center">Products</h2>
+            <div id="products">
+                <div>
+                    <div>
+                        <div>
+                            <select v-model="product_mission" style="margin-left: 5px;">
+                                <option v-for="mission in missions" :key="mission.id" v-bind:value="mission">{{ mission.name }}</option>
+                            </select>
+                            <input type="text" placeholder="Price in $" v-model="product_price" style="margin-left: 5px;"/>
+                            <input type="text" placeholder="Image URL" v-model="product_url" style="margin-left: 5px;"/>
+                            <input type="button" value="Save" @click="saveProduct" style="margin-left: 5px;"/>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <input type="text" placeholder="Footprint XX" v-model="product_footprint_xx" style="margin-left: 5px;"/>
+                            <input type="text" placeholder="Footprint XY" v-model="product_footprint_xy" style="margin-left: 5px;"/>
+                            <input type="text" placeholder="Footprint YY" v-model="product_footprint_yy" style="margin-left: 5px;"/>
+                            <input type="text" placeholder="Footprint YX" v-model="product_footprint_yx" style="margin-left: 5px;"/>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div v-for="product in products" :key="product.id">
+                    <div style="position: relative; width: 580px">
+                        <div style="margin-top: 20px;">
+                            <strong>[{{ product.name }}]</strong>
+                            <span style="position: absolute; right: 0"><input type="button" value="X" @click="delProduct(product)"/></span>
+                            <ul>
+                                <li><strong>ID: </strong> {{ product.id }} </li>
+                                <li><strong>Footprint XX:</strong> {{ product.footprint_xx }} </li>
+                                <li><strong>Footprint XY:</strong> {{ product.footprint_xy }} </li>
+                                <li><strong>Footprint YY:</strong> {{ product.footprint_yy }} </li>
+                                <li><strong>Footprint YX:</strong> {{ product.footprint_yx }} </li>
+                                <li><strong>Price:</strong> {{ product.price }} $</li>
+                                <li><strong>URL:</strong> {{ product.url }}</li>
+                                <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block flexed">
+            <h2 class="center">Search</h2>
+            <div id="filters">
+                <div>
+                    <div class="flex">
+                        <div>
+                            <input type="text" placeholder="Name" v-model="search_name" />
+                            <input type="button" value="Find" @click="findByName" style="margin-left: 5px;"/>
+                        </div>
+                        <div>
+                            <select v-model="search_type" style="margin-left: 5px;">
+                                <option value="Panchromatic">Panchromatic</option>
+                                <option value="Multispectral">Multispectral</option>
+                                <option value="Hyperspectral">Hyperspectral</option>
+                            </select>
+                            <input type="button" value="Find" @click="findByType" style="margin-left: 5px;"/>
+                        </div>
+                    </div>
+                    <div style="position: relative; width: 580px">
+                        <div v-for="product in found_products_by_name" :key="product.id">
+                            <div style="position: relative; width: 580px">
+                                <div style="margin-top: 20px;">
+                                    <strong>[{{ product.name }}]</strong>
+                                    <span style="position: absolute; right: 0"><input type="button" value="Order" @click="order(product)"/></span>
+                                    <ul>
+                                        <li><strong>ID: </strong> {{ product.id }} </li>
+                                        <li><strong>Footprint XX:</strong> {{ product.footprint_xx }} </li>
+                                        <li><strong>Footprint XY:</strong> {{ product.footprint_xy }} </li>
+                                        <li><strong>Footprint YY:</strong> {{ product.footprint_yy }} </li>
+                                        <li><strong>Footprint YX:</strong> {{ product.footprint_yx }} </li>
+                                        <li><strong>Price:</strong> {{ product.price }} $</li>
+                                        <li><strong>URL:</strong> {{ product.url }}</li>
+                                        <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="position: relative; width: 580px">
+                        <div v-for="product in found_products_by_type" :key="product.id">
+                            <div style="position: relative; width: 580px">
+                                <div style="margin-top: 20px;">
+                                    <strong>[{{ product.name }}]</strong>
+                                    <span style="position: absolute; right: 0"><input type="button" value="Order" @click="order(product)"/></span>
+                                    <ul>
+                                        <li><strong>ID: </strong> {{ product.id }} </li>
+                                        <li><strong>Footprint XX:</strong> {{ product.footprint_xx }} </li>
+                                        <li><strong>Footprint XY:</strong> {{ product.footprint_xy }} </li>
+                                        <li><strong>Footprint YY:</strong> {{ product.footprint_yy }} </li>
+                                        <li><strong>Footprint YX:</strong> {{ product.footprint_yx }} </li>
+                                        <li><strong>Price:</strong> {{ product.price }} $</li>
+                                        <li><strong>URL:</strong> {{ product.url }}</li>
+                                        <li><strong>Creation date:</strong> {{ product.creationDate }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
